@@ -23,7 +23,7 @@ public class Copy {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "BOOK_ID")
-    private Book book;
+    private Long bookId;
 
     @NotNull
     @Column(name = "STATUS")
