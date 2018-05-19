@@ -1,6 +1,6 @@
 package io.github.slawomirr.library.mapper;
 
-import io.github.slawomirr.library.domain.LibraryMember;
+import io.github.slawomirr.library.domain.Member;
 import io.github.slawomirr.library.domain.dto.MemberDto;
 import org.springframework.stereotype.Component;
 
@@ -11,23 +11,23 @@ import java.util.stream.Collectors;
 @Component
 public class MemberMapper {
 
-    public MemberDto mapToMemberDto(LibraryMember libraryMember) {
+    public MemberDto mapToMemberDto(final Member member) {
         return new MemberDto(
-                libraryMember.getId(),
-                libraryMember.getFirstName(),
-                libraryMember.getLastName(),
-                Date.valueOf(libraryMember.getMemberSince())
+                member.getId(),
+                member.getFirstName(),
+                member.getLastName(),
+                Date.valueOf(member.getMemberSince())
         );
     }
 
-    public List<MemberDto> mapToMemberDtoOutList(List<LibraryMember> libraryMemberList) {
-        return libraryMemberList.stream()
+    public List<MemberDto> mapToMemberDtoOutList(final List<Member> memberList) {
+        return memberList.stream()
                 .map(member -> mapToMemberDto(member))
                 .collect(Collectors.toList());
     }
 
-    public LibraryMember mapToMember(MemberDto memberDto) {
-        return new LibraryMember(
+    public Member mapToMember(final MemberDto memberDto) {
+        return new Member(
                 memberDto.getId(),
                 memberDto.getFirstName(),
                 memberDto.getLastName(),

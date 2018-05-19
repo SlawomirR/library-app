@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
@@ -12,8 +12,8 @@ import java.sql.Date;
 public class LendingDto {
 
     private Long id;
-    private CopyDto copyDtoOut;
-    private MemberDto memberDto;
-    private Date lendingDate;
-    private Date returnDate;
+    private Long copyId;
+    private Long memberId;
+    private LocalDate lendDate;
+    private LocalDate returnDate;
 }

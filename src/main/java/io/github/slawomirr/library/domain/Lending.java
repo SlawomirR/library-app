@@ -1,15 +1,16 @@
 package io.github.slawomirr.library.domain;
 
-import io.github.slawomirr.library.utils.LocalDateConverter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -18,35 +19,29 @@ public class Lending {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
+    @Column(name = "ID", unique = true)
     private Long id;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "COPY_ID")
     private Copy copy;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
-    private LibraryMember libraryMember;
+    private Member memberId;
 
     @NotNull
-    @Column(name = "LENDING_DATE")
-    @Convert(converter = LocalDateConverter.class)
-    private LocalDate lendingDate;
+    @Column(name = "LEND_DATE")
+    private LocalDate lendDate;
 
+    @NotNull
     @Column(name = "RETURN_DATE")
-    @Convert(converter = LocalDateConverter.class)
     private LocalDate returnDate;
 
-    public void setReturnDate(LocalDate returnDate) {
-        this.returnDate = returnDate;
-    }
-
-    public Lending(Copy copy, LibraryMember libraryMember, LocalDate lendingDate) {
+    public Lending(Copy copy, Member memberId, LocalDate lendDate, LocalDate returnDate) {
         this.copy = copy;
-        this.libraryMember = libraryMember;
-        this.lendingDate = lendingDate;
+        this.memberId = memberId;
+        this.lendDate = lendDate;
+        this.returnDate = returnDate;
     }
 }

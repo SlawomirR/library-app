@@ -1,6 +1,5 @@
 package io.github.slawomirr.library.domain;
 
-import io.github.slawomirr.library.utils.LocalDateConverter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -15,11 +15,12 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "MEMBERS")
-public class LibraryMember {
+public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @Column(name = "ID", unique = true)
+    private Long id;
 
     @NotNull
     @Column(name = "FIRSTNAME")
@@ -29,20 +30,25 @@ public class LibraryMember {
     @Column(name = "LASTNAME")
     private String lastName;
 
-    @NotNull
     @Column(name = "MEMBER_SINCE")
-    @Convert(converter = LocalDateConverter.class)
     private LocalDate memberSince;
 
     @OneToMany(
             targetEntity = Lending.class,
-            mappedBy = "libraryMember",
+            mappedBy = "memberId",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<Lending> lendings;
+    private List<Lending> lendings = new ArrayList<>();
 
-    public LibraryMember(String firstName, String lastName, LocalDate memberSince) {
+    public Member(String firstName, String lastName, LocalDate memberSince) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.memberSince = memberSince;
+    }
+
+    public Member(Long id, String firstName, String lastName, LocalDate memberSince) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.memberSince = memberSince;

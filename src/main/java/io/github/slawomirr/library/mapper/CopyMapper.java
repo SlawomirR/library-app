@@ -14,11 +14,11 @@ public class CopyMapper {
     @Autowired
     private BookMapper bookMapper;
 
-    public CopyDto mapToCopyDto(Copy copy) {
+    public CopyDto mapToCopyDto(final Copy copy) {
         return new CopyDto(
                 copy.getId(),
-                copy.getBookId(),
-                copy.getStatus());
+                copy.getBook().getId(),
+                copy.getEItemStatus());
     }
 
     public List<CopyDto> mapToCopyDtoList(List<Copy> copies) {

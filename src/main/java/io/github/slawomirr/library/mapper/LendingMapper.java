@@ -2,37 +2,44 @@ package io.github.slawomirr.library.mapper;
 
 import io.github.slawomirr.library.domain.Lending;
 import io.github.slawomirr.library.domain.dto.LendingDto;
+import io.github.slawomirr.library.repository.CopyRepository;
+import io.github.slawomirr.library.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
 public class LendingMapper {
 
     @Autowired
-    private CopyMapper copyMapper;
+    private CopyRepository copyRepository;
 
     @Autowired
-    private MemberMapper memberMapper;
+    private MemberRepository memberRepository;
 
-    public LendingDto mapToLendingDto(Lending lending) {
-        return new LendingDto(
-                lending.getId(),
-                copyMapper.mapToCopyDto(lending.getCopy()),
-                memberMapper.mapToMemberDto(lending.getLibraryMember()),
-                Date.valueOf(lending.getLendingDate()),
-                Optional.ofNullable(lending.getReturnDate())
-                        .map(Date::valueOf)
-                        .orElse(null));
+    public Lending mapToLending(final LendingDto lendingDto) {
+        return new Lending(
+                lendingDto.getId(),
+                copyRepository.findById(lendingDto.getCopyId()).get(),
+                memberRepository.findById(lendingDto.getMemberId()).get(),
+                lendingDto.getLendDate(),
+                lendingDto.getReturnDate());
     }
 
-    public List<LendingDto> mapToLendingDtoList(List<Lending> lendingBookList) {
-        return lendingBookList.stream()
-                .map(lending -> mapToLendingDto(lending))
+    public LendingDto mapToLendingDto(final Lending lending) {
+        return new LendingDto(
+                lending.getId(),
+                lending.getCopy().getId(),
+                lending.getMemberId().getId(),
+                lending.getLendDate(),
+                lending.getReturnDate());
+    }
+
+    public List<LendingDto> mapToLendingDtoList(final List<Lending> lendingList) {
+        return lendingList.stream()
+                .map(t -> new LendingDto(t.getId(), t.getCopy().getId(), t.getMemberId().getId(), t.getLendDate(), t.getReturnDate()))
                 .collect(Collectors.toList());
     }
 }
