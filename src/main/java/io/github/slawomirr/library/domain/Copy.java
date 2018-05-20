@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +23,12 @@ public class Copy {
     @Column(name = "ID", unique = true)
     private Long id;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "BOOK_ID")
     private Book book;
 
+    @NotNull
     @Column(name = "STATUS")
     private EItemStatus eItemStatus;
 

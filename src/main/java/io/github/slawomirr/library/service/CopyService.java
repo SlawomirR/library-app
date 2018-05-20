@@ -6,6 +6,7 @@ import io.github.slawomirr.library.repository.CopyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,17 +20,27 @@ public class CopyService {
     }
 
     public void updateLendStatus(Long copyId, EItemStatus eItemStatus) throws Exception {
-
         Optional<Copy> copy = copyRepository.findById(copyId);
         copy.get().setEItemStatus(eItemStatus);
         copyRepository.save(copy.orElseThrow(Exception::new));
     }
 
-    public Long countAvailableBookCopies(final String title) {
+    public List<Copy> getAllCopies() {
+        return copyRepository.findAll();
+    }
 
+    public Copy getCopyById(final Long bookCopyId) throws Exception {
+        return copyRepository.findById(bookCopyId).orElseThrow(Exception::new);
+    }
+
+    public void deleteCopy(final Long bookCopyId) {
+        copyRepository.deleteById(bookCopyId);
+    }
+
+    public Long countAvailableBookCopies(final String title) {
         return copyRepository.findAll().stream()
-                .filter(t -> t.getEItemStatus().equals(EItemStatus.AVAILABLE))
-                .filter(t -> t.getBook().getTitle().equals(title))
+                .filter(item -> item.getEItemStatus().equals(EItemStatus.AVAILABLE))
+                .filter(item -> item.getBook().getTitle().equals(title))
                 .count();
     }
 }
