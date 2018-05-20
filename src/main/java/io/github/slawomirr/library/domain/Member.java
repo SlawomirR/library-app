@@ -30,6 +30,7 @@ public class Member {
     @Column(name = "LASTNAME")
     private String lastName;
 
+    @NotNull
     @Column(name = "MEMBER_SINCE")
     private LocalDate memberSince;
 

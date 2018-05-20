@@ -10,6 +10,14 @@ import java.util.stream.Collectors;
 @Component
 public class BookMapper {
 
+    public Book mapToBook(final BookDto bookDto) {
+        return new Book(
+                bookDto.getId(),
+                bookDto.getTitle(),
+                bookDto.getAuthor(),
+                bookDto.getPublicationYear());
+    }
+
     public BookDto mapToBookDto(final Book book) {
         return new BookDto(
                 book.getId(),
@@ -20,16 +28,7 @@ public class BookMapper {
 
     public List<BookDto> mapToBookDtoList(final List<Book> bookList) {
         return bookList.stream()
-                .map(book -> mapToBookDto(book))
+                .map(this::mapToBookDto)
                 .collect(Collectors.toList());
-    }
-
-    public Book mapToBook(final BookDto bookDtoIn) {
-        return new Book(
-                bookDtoIn.getId(),
-                bookDtoIn.getTitle(),
-                bookDtoIn.getAuthor(),
-                bookDtoIn.getPublicationYear(),
-                null);
     }
 }
