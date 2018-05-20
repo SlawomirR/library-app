@@ -22,10 +22,12 @@ public class Lending {
     @Column(name = "ID", unique = true)
     private Long id;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "COPY_ID")
     private Copy copy;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member memberId;
@@ -34,7 +36,6 @@ public class Lending {
     @Column(name = "LEND_DATE")
     private LocalDate lendDate;
 
-    @NotNull
     @Column(name = "RETURN_DATE")
     private LocalDate returnDate;
 

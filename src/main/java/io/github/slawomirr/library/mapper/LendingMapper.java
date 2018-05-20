@@ -39,7 +39,7 @@ public class LendingMapper {
 
     public List<LendingDto> mapToLendingDtoList(final List<Lending> lendingList) {
         return lendingList.stream()
-                .map(t -> new LendingDto(t.getId(), t.getCopy().getId(), t.getMemberId().getId(), t.getLendDate(), t.getReturnDate()))
+                .map(this::mapToLendingDto)
                 .collect(Collectors.toList());
     }
 }

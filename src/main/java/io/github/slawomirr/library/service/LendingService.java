@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +19,10 @@ public class LendingService {
 
     @Autowired
     private CopyRepository copyRepository;
+
+    public List<Lending> getAllLend() {
+        return lendingRepository.findAll();
+    }
 
     public Lending saveLend(final Lending lending) {
         lending.getCopy().setEItemStatus(EItemStatus.CHECKED_OUT);
