@@ -54,6 +54,6 @@ public class CopyController {
 
     @RequestMapping(method = RequestMethod.GET, value = "countAvailableCopies")
     public Long countAvailableCopies(@RequestParam String title) {
-        return copyService.countAvailableBookCopies(title);
+        return copyService.countAvailableCopies(title);
     }
 }

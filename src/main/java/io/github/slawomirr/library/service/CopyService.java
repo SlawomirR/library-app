@@ -37,7 +37,7 @@ public class CopyService {
         copyRepository.deleteById(bookCopyId);
     }
 
-    public Long countAvailableBookCopies(final String title) {
+    public Long countAvailableCopies(final String title) {
         return copyRepository.findAll().stream()
                 .filter(item -> item.getEItemStatus().equals(EItemStatus.AVAILABLE))
                 .filter(item -> item.getBook().getTitle().equals(title))

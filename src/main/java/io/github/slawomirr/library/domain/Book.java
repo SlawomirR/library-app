@@ -35,7 +35,6 @@ public class Book {
     @Column(name = "PUBLICATION_YEAR")
     private Integer publicationYear;
 
-    @NotNull
     @OneToMany(
             targetEntity = Copy.class,
             mappedBy = "book",
