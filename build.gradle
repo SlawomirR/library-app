@@ -31,5 +31,5 @@ dependencies {
 	compile('org.projectlombok:lombok:1.16.20')
 	runtime('mysql:mysql-connector-java:8.0.11')
 	testCompile('org.springframework.boot:spring-boot-starter-test:2.0.1.RELEASE')
-	testCompile('com.h2database:h2:1.4.196')
+	testCompile('com.h2database:h2:1.4.197')
 }
