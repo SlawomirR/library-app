@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Simple Library Application</title>
+</head>
+<body>
+<h1>
+    Simple Library Application
+</h1>
+<p>
+    This application is designed as REST API using CRUD operations with H2 database support.
+</p>
+<br>
+<p>
+    Documentation for this API is created using Swagger2 and can be found at:
+    <br>
+    <a th:href="${url_link_documentation}" th:text="${url_info_documentation}"></a>
+</p>
+<br>
+<p>
+    Access to H2 database console can be done at (passing in JDBC URL field:
+    <span th:text="${h2_url_field_info}">
+    </span>
+    ):
+    <br>
+    <a th:href="${url_link_h2}" th:text="${url_info_h2}"></a>
+</p>
+</body>
+</html>

@@ -26,13 +26,13 @@ public class LendingController {
         return lendingMapper.mapToLendingDtoList(lendingService.getAllLend());
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "borrowBook", consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "lendBook", consumes = APPLICATION_JSON_VALUE)
     public void lendBook(@RequestBody LendingDto lendingDto) {
         lendingMapper.mapToLendingDto(lendingService.saveLend(lendingMapper.mapToLending(lendingDto)));
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "returnBook")
-    public void returnBook(@RequestParam Long borrowedBookId) {
-        lendingService.returnBook(borrowedBookId);
+    public void returnBook(@RequestParam Long lendBookId) {
+        lendingService.returnBook(lendBookId);
     }
 }
