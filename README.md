@@ -1,0 +1,2 @@
+# Library Application
+In progress ... I want to build this application as REST API for the simple system that supports borrowing books from the library. It should make use of H2 database to keep information about books, readers and their activity.
