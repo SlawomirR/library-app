@@ -1,4 +1,3 @@
-/*
 package io.github.slawomirr.library.config;
 
 //import javax.servlet.annotation.WebServlet;
@@ -17,4 +16,3 @@ public class H2Configuration {
         return registration;
     }
 }
-*/
