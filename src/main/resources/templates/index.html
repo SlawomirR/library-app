@@ -16,14 +16,14 @@
     <li>
         Documentation for this API is created using Swagger and can be found at:
         <br>
-        <a th:href="${url_link_documentation}" th:text="${url_info_documentation}"></a>
+        <a th:href="${url_link_documentation}" th:text="${url_info_documentation}">http://localhost/swagger-ui.html</a>
     </li>
-    <li>
+    <li th:if="${isH2}">
         Access to H2 database console can be done at (passing in JDBC URL field:
         <b><span th:text="${h2_url_field_info}">
         </span>)</b>:
         <br>
-        <a th:href="${url_link_h2}" th:text="${url_info_h2}"></a>
+        <a th:href="${url_link_h2}" th:text="${url_info_h2}">applied to H2 Memory database only</a>
     </li>
 </ul>
 <!--
